@@ -1,15 +1,23 @@
 const container = document.getElementById("conteudoCatalogo");
 const campoBusca = document.getElementById("campoBusca");
+const iconesCategoria = {
+    pintura: "🎨",
+    costura: "🧵",
+    modelagem: "🖌️",
+};
 
 function exibirProdutos(lista) {
     container.innerHTML = "";
     lista.forEach(produto => {
         const card = document.createElement("div");
         card.className = "card";
+        const categoria = produto[2];
+        const icone = iconesCategoria[categoria.toLowerCase()] || "🏷️";
         card.innerHTML = `
             <img src="${produto[4]}" alt="${produto[0]}">
+            <span class="icone-categoria" aria-label="Categoria: ${categoria}" title="${categoria}">${icone}</span>
             <h3>${produto[0]}</h3>
-            <p class="categoria">${produto[2]}</p>
+            <p class="categoria">${categoria}</p>
             <p class="descricao">${produto[1]}</p>
             <p class="preco">R$ ${Number(produto[3]).toFixed(2)}</p>
         `;
